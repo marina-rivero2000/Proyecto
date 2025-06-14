@@ -52,9 +52,17 @@ Ideal para:
     <li>Preparar pedidos completos</li>
     <li>Agilizar la atención en mostrador</li>
 </ul>
+
+- Predictor: <br> Selecciona un <strong>artículo</strong> para predecir su demanda futura.
+
+Ideal para:
+<ul>
+    <li>Planificar compras y reposición</li>
+    <li>Optimizar inventario</li>
+    <li>Reducir faltantes y sobrestock</li>
 </div>
                         
 ---
 
-💡 Esta herramienta está diseñada para mejorar la atención al cliente y optimizar la venta en tu ferretería.
+💡 Esta herramienta está diseñada para mejorar la atención al cliente y optimizar la venta en tu pequeño comercio.
 """, unsafe_allow_html=True)

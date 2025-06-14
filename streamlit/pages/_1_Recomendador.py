@@ -118,7 +118,34 @@ def recomendar():
         st.warning("⚠️ Por favor, selecciona al menos un artículo.")
 
 # Cargar datos
-ventas = cargar_datos()
+# ventas = cargar_datos()
+
+st.subheader("📁 Cargar archivos CSV de ventas y artículos")
+
+archivo_ventas = st.sidebar.file_uploader("Sube archivo CSV de ventas", type=["csv"], key="ventas")
+archivo_articulos = st.sidebar.file_uploader("Sube archivo CSV de artículos", type=["csv"], key="articulos")
+
+ventas = None
+
+if archivo_ventas is not None and archivo_articulos is not None:
+    try:
+        ventas_df = pd.read_csv(archivo_ventas, usecols=['Codigo_Fac', 'Año', 'Codigo_Art', 'Descripcion_Art'])
+        articulos_df = pd.read_csv(archivo_articulos, usecols=['Codigo_Art', 'Familia'])
+        ventas = cargar_datos(ventas_df, articulos_df)
+
+        st.success("✅ Archivos cargados y procesados correctamente.")
+
+    except Exception as e:
+        st.error(f"❌ Error al leer o procesar los archivos: {e}")
+        st.stop()
+
+else:
+    st.info("⚠️ Por favor, sube ambos archivos CSV para continuar.")
+    st.stop()
+
+# Aquí continúa el resto del código con `ventas` ya cargado y listo para usar
+
+
 frequency_ap, df_train = entrenar_modelo(ventas, soporte_minimo=0.02)
 reglas_estrictas = generar_reglas(frequency_ap, lift_min=2, conf_min=0.5)
 reglas_no_estrictas = generar_reglas(frequency_ap, lift_min=1, conf_min=0.3)
@@ -164,6 +191,7 @@ with col_btns:
     with col_b:
         st.button("🗑️ Limpiar", on_click=limpiar_seleccion, use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
+    
 # Resultados
 if st.session_state.recomendaciones:
     st.subheader("📦 Productos recomendados")

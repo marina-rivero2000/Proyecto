@@ -4,12 +4,12 @@ from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori, association_rules
 
 # Cargar datos
-def cargar_datos():
+def cargar_datos(ventas, articulos):
     # Cargar las ventas
-    ventas = pd.read_csv('data/ventas.csv', usecols=['Codigo_Fac', 'Año', 'Codigo_Art', 'Descripcion_Art'])
+    # ventas = pd.read_csv('data/ventas.csv', usecols=['Codigo_Fac', 'Año', 'Codigo_Art', 'Descripcion_Art'])
     ventas['Codigo_Art'] = ventas['Codigo_Art'].astype(str)
     # Cargar los artículos
-    articulos = pd.read_csv('data/articulos2.csv', usecols=['Codigo_Art', 'Familia'])
+    # articulos = pd.read_csv('data/articulos2.csv', usecols=['Codigo_Art', 'Familia'])
     articulos['Codigo_Art'] = articulos['Codigo_Art'].astype(str)
     # Selector múltiple de productos
     mapeo = dict(zip(articulos['Codigo_Art'], articulos['Familia']))
